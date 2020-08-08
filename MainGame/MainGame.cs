@@ -24,8 +24,9 @@ namespace MainGame
 
             _graphics = new GraphicsDeviceManager(this)
             {
-                PreferredBackBufferWidth = 1400,
-                PreferredBackBufferHeight = 900
+                PreferredBackBufferWidth = 1920,
+                PreferredBackBufferHeight = 1080,
+                IsFullScreen = true
             };
 
             Content.RootDirectory = "Content";
