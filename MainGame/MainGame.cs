@@ -16,7 +16,8 @@ namespace MainGame
         private OrthographicCamera _camera;
         private EntityFactory _entityFactory;
         private SpriteBatch _spriteBatch;        
-        private World _world;        
+        private World _world;
+        private IContainer Container;
 
         public MainGame()
         {
@@ -39,9 +40,10 @@ namespace MainGame
         {
             _camera = new OrthographicCamera(GraphicsDevice);
 
-            var builder = new ContainerBuilder().Build() as ContainerBuilder;
+            var builder = new ContainerBuilder();
             builder.RegisterInstance(new SpriteBatch(GraphicsDevice));
             builder.RegisterInstance(_camera);
+            Container = builder.Build();
 
             _world = new WorldBuilder()
                 .AddSystem(new WorldSystem())

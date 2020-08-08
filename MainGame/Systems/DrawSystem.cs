@@ -36,7 +36,7 @@ namespace MainGame.Systems
 
         public override void Initialize(IComponentMapperService mapperService)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }
