@@ -14,6 +14,7 @@ namespace MainGame.Systems
     {
         private SpriteBatch _spriteBatch;
         private OrthographicCamera _camera;
+        private ComponentMapper<Transform2> _transformMapper;
 
         public DrawSystem(SpriteBatch spriteBatch, OrthographicCamera camera)
             : base(Aspect.All(typeof(Transform2)))
@@ -21,22 +22,23 @@ namespace MainGame.Systems
             this._spriteBatch = spriteBatch;
             this._camera = camera;
         }
+        public override void Initialize(IComponentMapperService mapperService)
+        {
+            _transformMapper = mapperService.GetMapper<Transform2>();
+        }
 
         public override void Draw(GameTime gameTime)
         {
-            _spriteBatch.Begin();
+            _spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: _camera.GetViewMatrix());
+
+            foreach (var entity in ActiveEntities)
+            {
+                var transform = _transformMapper.Get(entity);
+
+                _spriteBatch.DrawPoint(transform.Position, Color.Red);
+            }
 
             _spriteBatch.End();
-        }
-
-        public override void Initialize(World world)
-        {
-            base.Initialize(world);
-        }
-
-        public override void Initialize(IComponentMapperService mapperService)
-        {
-            //throw new NotImplementedException();
         }
     }
 }
