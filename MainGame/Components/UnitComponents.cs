@@ -6,38 +6,38 @@ using MonoGame.Extended.Entities.Systems;
 
 namespace MainGame.Components.Unit
 {
-    class Location
+    public class Location
     {
         public int x { get; set; }
-        public int y { get; set; } 
+        public int y { get; set; }
         public int z { get; set; }
     }
 
-    class Destructable
+    public class Destructable
     {
         public int Health { get; set; }
     }
 
-    class Rotation
+    public enum Morality
     {
-        //x y and z planes
-    }
-
-    enum Morality 
-    {
-        Good, 
+        Good,
         Evil,
         Neutral
     }
 
+    public class Ability
+    {
+        public string Name;
+        public int Experience;
+    }
+
     class Stats
     {
-        public int 
-            strength, 
-            intelligence, 
-            knowledge, 
-            experience, 
-            level, 
+        public int
+            strength,
+            intelligence,
+            abilities, // TODO: move to list
+            wisdom,
             agility, 
             luck, 
             charisma, 
@@ -45,5 +45,16 @@ namespace MainGame.Components.Unit
             daring, 
             ethics, 
             cunning;
+
+        public int Level { get { return abilities * wisdom; } }
+        public int CalcWisdom()
+        {
+            /*
+             * go into each ability, get exp: wisdom = totalExp
+             */
+            throw new NotImplementedException();
+        }
     }
+
+    // when an entity contains 2+ components, it causes a reaction
 }
